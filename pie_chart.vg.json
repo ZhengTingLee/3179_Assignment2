@@ -1,10 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 1000,
+  "width": 1050,
   "height": 400,
-  "title": "Marriage Distribution by Sex (Filtered by Year, and Age Group)",
+  "title": {
+    "text": "Marriage Distribution by Gender",
+    "subtitle": "Filtered by Year, State and Age Group",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d"
+  },
   "data": {
-    "url": "marriages_state_age_sex - Cleaned.csv",
+    "url": "Cleaned_Data/marriages_state_age_sex - Cleaned.csv",
     "format": { "type": "csv" }
   },
   "params": [
@@ -24,10 +31,18 @@
       "type": "quantitative",
       "title": "Number of Marriages"
     },
-    "color": { "field": "sex", "type": "nominal", "title": "Sex" },
+    "color": {
+      "field": "sex",
+      "type": "nominal",
+      "title": "Gender",
+      "scale": {
+        "domain": ["female", "male"],
+        "range": ["#ff9cba", "#82a3ff"]
+      }
+    },
     "tooltip": [
       { "field": "state", "title": "State" },
-      { "field": "sex", "title": "Sex" },
+      { "field": "sex", "title": "Gender" },
       { "field": "total_marriages", "title": "Total" },
       { "field": "year", "title": "Year" }
     ]

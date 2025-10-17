@@ -3,7 +3,20 @@
   "background": "#c0e0ff",
   "width": 1000,
   "height": 400,
-  "title": "Total Number of Marriages by States in Malaysia (Year 2017 - 2022)",
+  "title": {
+    "text": "Total Number of Marriages by States in Malaysia (Year 2017 - 2022)",
+    "subtitle": "Drag and select the filters below the map for further details.",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d"
+  },
+  "config": {
+    "title": {
+      "font": "Times New Roman",
+      "fontSize": 14
+    }
+  },
   "params": [
     {
       "name": "Year_selection",
@@ -103,7 +116,7 @@
   "layer": [
     {
       "data": {
-        "url": "malaysia_states_map.topojson",
+        "url": "Original_Data/malaysia_states_map.topojson",
         "format": {
           "type": "topojson",
           "feature": "ne_10m_graticules_1"
@@ -117,7 +130,7 @@
     },
     {
       "data": {
-        "url": "malaysia_states_map.topojson",
+        "url": "Original_Data/malaysia_states_map.topojson",
         "format": {
           "type": "topojson",
           "feature": "my"
@@ -131,7 +144,7 @@
     },
     {
       "data": {
-        "url": "marriages_state_age - Cleaned.csv",
+        "url": "Cleaned_Data/marriages_state_age - Cleaned.csv",
         "format": {
           "type": "csv"
         }
@@ -141,7 +154,7 @@
           "lookup": "state",
           "from": {
             "data": {
-              "url": "malaysia_states_map.topojson",
+              "url": "Original_Data/malaysia_states_map.topojson",
               "format": {
                 "type": "topojson",
                 "feature": "my"
@@ -167,7 +180,7 @@
           "title": "Number of Marriages",
           "scale": {
             "scheme": "reds",
-            "domain": [0, 70000]
+            "domain": [0, 75000]
           }
         },
         "tooltip": [
