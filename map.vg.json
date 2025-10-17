@@ -1,0 +1,182 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#c0e0ff",
+  "width": 1000,
+  "height": 400,
+  "title": "Total Number of Marriages by States in Malaysia (Year 2017 - 2022)",
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2022,
+        "step": 1,
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "State_selection",
+      "value": "all",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Kuala Lumpur",
+          "Labuan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Penang",
+          "Perak",
+          "Perlis",
+          "Putrajaya",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "all"
+        ],
+        "labels": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Kuala Lumpur",
+          "Labuan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Penang",
+          "Perak",
+          "Perlis",
+          "Putrajaya",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu",
+          "All states"
+        ],
+        "name": "State: "
+      }
+    },
+    {
+      "name": "Age_selection",
+      "value": "all",
+      "bind": {
+        "input": "select",
+        "options": [
+          "< 20",
+          "20-24",
+          "25-29",
+          "30-34",
+          "35-39",
+          "40-44",
+          "45-49",
+          "50-54",
+          "55-59",
+          "60-64",
+          "65+",
+          "all"
+        ],
+        "labels": [
+          "less than 20",
+          "20-24",
+          "25-29",
+          "30-34",
+          "35-39",
+          "40-44",
+          "45-49",
+          "50-54",
+          "55-59",
+          "60-64",
+          "65 and above",
+          "All ages"
+        ],
+        "name": "Age group: "
+      }
+    }
+  ],
+  "projection": { "type": "mercator" },
+  "layer": [
+    {
+      "data": {
+        "url": "malaysia_states_map.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_graticules_1"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "malaysia_states_map.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "my"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eaeaea",
+        "stroke": "#333"
+      }
+    },
+    {
+      "data": {
+        "url": "marriages_state_age - Cleaned.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "malaysia_states_map.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "my"
+              }
+            },
+            "key": "properties.name"
+          },
+          "as": "geo"
+        },
+        {
+          "filter": "datum.year == Year_selection && (State_selection == 'all' || datum.state == State_selection) && datum.age == Age_selection"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#333"
+      },
+      "encoding": {
+        "shape": { "field": "geo", "type": "geojson" },
+        "color": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "title": "Number of Marriages",
+          "scale": {
+            "scheme": "reds",
+            "domain": [0, 70000]
+          }
+        },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "year", "title": "Year" },
+          { "field": "total_marriages", "title": "Total Number of Marriages" },
+          { "field": "marriage_rate", "title": "Marriage Rate" }
+        ]
+      }
+    }
+  ]
+}
