@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1050,
+  "height": 400,
+  "title": {
+    "text": "Relationship between Marriages and Births",
+    "subtitle": "Filtered by State",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "color": "#2c3e50",
+    "subtitleColor": "#7f8c8d"
+  },
+  "config": {
+    "title": {
+      "font": "Times New Roman",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "Cleaned_Data/birth_state - Cleaned.csv",
+    "format": { "type": "csv" }
+  },
+  "params": [
+    {
+      "name": "State_selection",
+      "value": "Johor",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Kuala Lumpur",
+          "Labuan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Penang",
+          "Perak",
+          "Perlis",
+          "Putrajaya",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu"
+        ],
+        "labels": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Kuala Lumpur",
+          "Labuan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Penang",
+          "Perak",
+          "Perlis",
+          "Putrajaya",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu"
+        ],
+        "name": "State: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.state == State_selection"
+    }
+  ],
+  "mark": { "type": "line", "point": true },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": { "labelAngle": 0 }
+    },
+    "y": {
+      "field": "total_live_births",
+      "type": "quantitative",
+      "title": "Count"
+    },
+    "tooltip": [
+      { "field": "year", "title": "Year" },
+      { "field": "total_marriages", "title": "Total Number of Marriages" },
+      { "field": "total_live_births", "title": "Total Number of Births" }
+    ]
+  }
+}

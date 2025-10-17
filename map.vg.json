@@ -116,7 +116,7 @@
   "layer": [
     {
       "data": {
-        "url": "Original_Data/malaysia_states_map.topojson",
+        "url": "Cleaned_Data/malaysia_states_map.topojson",
         "format": {
           "type": "topojson",
           "feature": "ne_10m_graticules_1"
@@ -130,7 +130,7 @@
     },
     {
       "data": {
-        "url": "Original_Data/malaysia_states_map.topojson",
+        "url": "Cleaned_Data/malaysia_states_map.topojson",
         "format": {
           "type": "topojson",
           "feature": "my"
@@ -189,6 +189,22 @@
           { "field": "total_marriages", "title": "Total Number of Marriages" },
           { "field": "marriage_rate", "title": "Marriage Rate" }
         ]
+      }
+    },
+    {
+      "data": {
+        "url": "Cleaned_Data/malaysia_states_map.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "my"
+        }
+      },
+      "mark": { "type": "text" },
+      "encoding": {
+        "longitude": { "field": "properties.longitude" },
+        "latitude": { "field": "properties.latitude" },
+        "text": { "field": "properties.name" },
+        "color": { "value": "black" }
       }
     }
   ]

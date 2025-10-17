@@ -10,6 +10,12 @@
     "color": "#2c3e50",
     "subtitleColor": "#7f8c8d"
   },
+  "config": {
+    "title": {
+      "font": "Times New Roman",
+      "fontSize": 14
+    }
+  },
   "data": {
     "url": "Cleaned_Data/marriages_state_age_sex - Cleaned.csv",
     "format": { "type": "csv" }
@@ -43,7 +49,7 @@
     "tooltip": [
       { "field": "state", "title": "State" },
       { "field": "sex", "title": "Gender" },
-      { "field": "total_marriages", "title": "Total" },
+      { "field": "total_marriages", "title": "Total Marriages" },
       { "field": "year", "title": "Year" }
     ]
   }

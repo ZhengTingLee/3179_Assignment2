@@ -1,5 +1,6 @@
 var vg_1 = "map.vg.json";
 var vg_2 = "pie_chart.vg.json";
+var vg_3 = "line_chart.vg.json";
 
 Promise.all([vegaEmbed("#map", vg_1), vegaEmbed("#pie_chart", vg_2)]).then(function(results) {
   const mapView = results[0].view;
@@ -22,3 +23,5 @@ Promise.all([vegaEmbed("#map", vg_1), vegaEmbed("#pie_chart", vg_2)]).then(funct
   });
 
 }).catch(console.error);
+
+vegaEmbed("#line_chart", vg_3).then(function(result) {}).catch(console.error);
