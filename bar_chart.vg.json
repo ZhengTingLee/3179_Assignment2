@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1200,
+  "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "title": {
+    "text": "Number of Marriages by Gender",
+    "font": "Times New Roman",
+    "fontSize": 20,
+    "color": "#000000",
+    "anchor": "middle"
+  },
+  "config": {
+    "title": {
+      "font": "Times New Roman",
+      "fontSize": 14
+    },
+    "axis": {
+      "labelFont": "Calibri",
+      "titleFont": "Times New Roman",
+      "grid": false
+    }
+  },
+  "data": {
+    "url": "Cleaned_Data/marriages_state_age_sex - Cleaned.csv",
+    "format": { "type": "csv" }
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2022,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "filter": "datum.year == Year_selection && datum.age == 'all'"
+    }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "bar" },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "axis": { "labelAngle": 0 }
+        },
+        "xOffset": { "field": "sex" },
+        "order": {
+          "field": "sex",
+          "type": "nominal",
+          "sort": "descending"
+        },
+        "y": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "title": "Number of Marriages",
+          "scale": { "domain": [0, 90000] }
+        },
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "legend": {
+            "title": "Gender",
+            "titleFont": "Times New Roman",
+            "titleFontSize": 14,
+            "labelFont": "Calibri",
+            "labelFontSize": 12
+          },
+          "scale": {
+            "domain": ["Female", "Male"],
+            "range": ["#ff9cba", "#82a3ff"]
+          },
+          "condition": [
+            {
+              "test": "indexof(['Selangor', 'Johor', 'Kelantan'], datum.state) >= 0 && datum.sex == 'Female'",
+              "value": "#ff9cba"
+            },
+            {
+              "test": "indexof(['Selangor', 'Johor', 'Kelantan'], datum.state) >= 0 && datum.sex == 'Male'",
+              "value": "#82a3ff"
+            },
+            {
+              "test": "datum.sex == 'Female'",
+              "value": "#eeccdb"
+            },
+            {
+              "test": "datum.sex == 'Male'",
+              "value": "#c7d1f7"
+            }
+          ]
+        },
+
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "sex", "title": "Gender" },
+          { "field": "total_marriages", "title": "Total Marriages" },
+          { "field": "year", "title": "Year" }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 16,
+        "font": "Times New Roman",
+        "fontWeight": "bold",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "value": 20 },
+        "y": { "value": 20 },
+        "text": {
+          "value": "Top 3 Highest Marriage Distribution States:"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 14,
+        "font": "Calibri",
+        "fontWeight": "normal",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "value": 20 },
+        "y": { "value": 40 },
+        "text": {
+          "value": "1. Selangor"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 14,
+        "font": "Calibri",
+        "fontWeight": "normal",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "value": 20 },
+        "y": { "value": 60 },
+        "text": {
+          "value": "2. Johor"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 12,
+        "font": "Calibri",
+        "fontWeight": "normal",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "value": 20 },
+        "y": { "value": 80 },
+        "text": {
+          "value": "3. Kelantan"
+        }
+      }
+    }
+  ]
+}

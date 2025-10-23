@@ -1,15 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#c0e0ff",
-  "width": 1000,
+  "width": 1200,
   "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
   "title": {
-    "text": "Total Number of Marriages by States in Malaysia (Year 2017 - 2022)",
-    "subtitle": "Drag and select the filters below the map for further details.",
+    "text": "Marriage Rate (by 1000 population) by States in Malaysia",
     "fontSize": 20,
-    "subtitleFontSize": 14,
-    "color": "#2c3e50",
-    "subtitleColor": "#7f8c8d"
+    "color": "#000000"
   },
   "config": {
     "title": {
@@ -38,15 +36,12 @@
           "Johor",
           "Kedah",
           "Kelantan",
-          "Kuala Lumpur",
-          "Labuan",
           "Melaka",
           "Negeri Sembilan",
           "Pahang",
-          "Penang",
           "Perak",
           "Perlis",
-          "Putrajaya",
+          "Pulau Pinang",
           "Sabah",
           "Sarawak",
           "Selangor",
@@ -57,15 +52,12 @@
           "Johor",
           "Kedah",
           "Kelantan",
-          "Kuala Lumpur",
-          "Labuan",
           "Melaka",
           "Negeri Sembilan",
           "Pahang",
-          "Penang",
           "Perak",
           "Perlis",
-          "Putrajaya",
+          "Pulau Pinang",
           "Sabah",
           "Sarawak",
           "Selangor",
@@ -77,7 +69,7 @@
     },
     {
       "name": "Age_selection",
-      "value": "all",
+      "value": "25-29",
       "bind": {
         "input": "select",
         "options": [
@@ -138,13 +130,13 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#eaeaea",
+        "fill": "#d7d7d7",
         "stroke": "#333"
       }
     },
     {
       "data": {
-        "url": "Cleaned_Data/marriages_state_age - Cleaned.csv",
+        "url": "Cleaned_Data/marriage_population_normalized-Cleaned.csv",
         "format": {
           "type": "csv"
         }
@@ -170,24 +162,32 @@
       ],
       "mark": {
         "type": "geoshape",
-        "stroke": "#333"
+        "stroke": "#000000"
       },
       "encoding": {
         "shape": { "field": "geo", "type": "geojson" },
         "color": {
-          "field": "total_marriages",
+          "field": "marriage_rate_per_1000_population",
           "type": "quantitative",
-          "title": "Number of Marriages",
+          "legend": {
+            "title": "Marriage Rate",
+            "titleFont": "Times New Roman",
+            "titleFontSize": 14,
+            "labelFont": "Calibri",
+            "labelFontSize": 12
+          },
           "scale": {
             "scheme": "reds",
-            "domain": [0, 75000]
+            "domain": [0, 150]
           }
         },
         "tooltip": [
           { "field": "state", "title": "State" },
           { "field": "year", "title": "Year" },
-          { "field": "total_marriages", "title": "Total Number of Marriages" },
-          { "field": "marriage_rate", "title": "Marriage Rate" }
+          {
+            "field": "marriage_rate_per_1000_population",
+            "title": "Marriage Rate"
+          }
         ]
       }
     },
@@ -199,12 +199,17 @@
           "feature": "my"
         }
       },
+      "transform": [
+        {
+          "filter": "!(datum.properties.name == 'Labuan' || datum.properties.name == 'Kuala Lumpur' || datum.properties.name == 'Putrajaya')"
+        }
+      ],
       "mark": { "type": "text" },
       "encoding": {
         "longitude": { "field": "properties.longitude" },
         "latitude": { "field": "properties.latitude" },
         "text": { "field": "properties.name" },
-        "color": { "value": "black" }
+        "color": { "value": "#000000" }
       }
     }
   ]

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "padding": { "top": 10, "right": 10, "bottom": 10, "left": 10 },
+  "columns": 4,
+  "title": {
+    "text": "Comparison View of Marriage Rate (by 1000 population) by Age Groups",
+    "font": "Times New Roman",
+    "fontSize": 20,
+    "color": "#000000",
+    "anchor": "middle"
+  },
+  "config": {
+    "axisX": {
+      "labelFont": "Calibri",
+      "titleFont": "Times New Roman",
+      "grid": true
+    },
+    "axisY": {
+      "labelFont": "Calibri",
+      "titleFont": "Times New Roman",
+      "grid": false
+    },
+    "header": {
+      "labelFont": "Times New Roman",
+      "titleFont": "Times New Roman"
+    },
+    "text": { "font": "Calibri" }
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2017,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2022,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "data": {
+    "url": "Cleaned_Data/marriage_population_normalized-Cleaned.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    { "filter": "datum.age != 'all' && datum.year == Year_selection" }
+  ],
+  "facet": {
+    "field": "state",
+    "type": "nominal",
+    "title": null,
+    "header": { "labelFontSize": 14 }
+  },
+  "resolve": {
+    "scale": { "y": "independent" },
+    "axis": { "x": "independent" }
+  },
+  "spec": {
+    "width": 231,
+    "height": 120,
+    "layer": [
+      {
+        "mark": { "type": "bar", "clip": true },
+        "encoding": {
+          "y": {
+            "field": "age",
+            "type": "ordinal",
+            "title": "Age Group",
+            "axis": { "labelAngle": 0, "labelFontSize": 10 },
+            "sort": [
+              "65+",
+              "60-64",
+              "55-59",
+              "50-54",
+              "45-49",
+              "35-39",
+              "40-44",
+              "30-34",
+              "25-29",
+              "20-24",
+              "<20"
+            ]
+          },
+          "x": {
+            "field": "marriage_rate_per_1000_population",
+            "type": "quantitative",
+            "title": "Marriage Rate (by 1000 population)",
+            "scale": { "domain": [0, 140] },
+            "axis": {
+              "labelFontSize": 10,
+              "titleFontSize": 10
+            }
+          },
+          "color": { "field": "state", "type": "nominal", "legend": null },
+          "tooltip": [
+            { "field": "state", "title": "State" },
+            { "field": "age", "title": "Age Group" },
+            {
+              "field": "marriage_rate_per_1000_population",
+              "title": "Marriage Rate"
+            },
+            { "field": "year", "title": "Year" }
+          ]
+        }
+      }
+    ]
+  }
+}

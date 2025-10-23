@@ -1,27 +1,21 @@
 var vg_1 = "map.vg.json";
-var vg_2 = "pie_chart.vg.json";
-var vg_3 = "line_chart.vg.json";
+var vg_2 = "bar_chart.vg.json";
+var vg_3 = "detail_bar_chart.vg.json";
+var vg_4 = "line_chart.vg.json";
 
-Promise.all([vegaEmbed("#map", vg_1), vegaEmbed("#pie_chart", vg_2)]).then(function(results) {
-  const mapView = results[0].view;
-  const pieView = results[1].view;
+// Promise.all([
+//     vegaEmbed("#map", vg_1, {actions: false}), 
+//     vegaEmbed("#bar_chart", vg_2, {actions: false})
+//   ]).then(function(results) {
+//   const mapView = results[0].view;
+//   const barView = results[1].view;
 
-  // Listen for state selection change in the map
-  mapView.addSignalListener("State_selection", function(name, value) {
-    // Update the same signal in the pie chart
-    pieView.signal("State_selection", value).run();
-  });
+//   mapView.addSignalListener("Year_selection", function(name, value) {
+//     barView.signal("Year_selection", value).run();
+//   });
 
-  // Optionally, listen for year selection as well
-  mapView.addSignalListener("Year_selection", function(name, value) {
-    pieView.signal("Year_selection", value).run();
-  });
-
-  // Optionally for age selection if applicable
-  mapView.addSignalListener("Age_selection", function(name, value) {
-    pieView.signal("Age_selection", value).run();
-  });
-
-}).catch(console.error);
-
-vegaEmbed("#line_chart", vg_3).then(function(result) {}).catch(console.error);
+// }).catch(console.error);
+vegaEmbed("#map", vg_1, {actions: false}).then(function(result) {}).catch(console.error);
+vegaEmbed("#bar_chart", vg_2, {actions: false}).then(function(result) {}).catch(console.error);
+vegaEmbed("#detail_bar_chart", vg_3, {actions: false}).then(function(result) {}).catch(console.error);
+vegaEmbed("#line_chart", vg_4, {actions: false}).then(function(result) {}).catch(console.error);

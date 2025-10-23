@@ -1,4 +1,5 @@
 h1 {
+  text-align: center;
   font-family: 'Cinzel Decorative', serif;
   color: #2c3e50;
 }
@@ -10,6 +11,79 @@ h1 {
 }
 
 h2 {
-  font-family: 'Times New Roman', serif;
+  text-align: center;
+  font-family: 'Cinzel Decorative', serif;
   color: #2c3e50;
 }
+
+p {
+  text-align: center;
+  font-family: 'Calibri', serif;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+
+.viz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Left-align Vega-Lite controls */
+.vega-bindings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#map, #bar_chart, #line_chart {
+  margin: 20px 0;
+  width: auto;
+  height: auto;
+}
+
+body {
+  background: linear-gradient(to bottom right, #ffe8ed, #d9ecff);
+  font-family: 'Times New Roman', serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+#metadata-bar {
+  background-color: #ffe9ee;
+  padding: 20px 0;
+  font-family: Calibri, sans-serif;
+  font-size: 14px;
+  color: #2c3e50;
+  width: 100%;
+}
+
+#metadata-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+#metadata-content h2 {
+  text-align: center;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: 'Cinzel Decorative', serif;
+  color: #2c3e50;
+}
+
+#metadata-content b{
+  font-size: 18px;
+  font-family: 'Times New Roman', serif;
+}
+

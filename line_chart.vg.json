@@ -1,19 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 1050,
+  "width": 1200,
   "height": 400,
+  "autosize": { "type": "fit", "contains": "padding" },
   "title": {
     "text": "Relationship between Marriages and Births",
-    "subtitle": "Filtered by State",
     "fontSize": 20,
-    "subtitleFontSize": 14,
-    "color": "#2c3e50",
-    "subtitleColor": "#7f8c8d"
+    "color": "#2c3e50"
   },
   "config": {
     "title": {
       "font": "Times New Roman",
       "fontSize": 14
+    },
+    "axis": {
+      "labelFont": "Calibri",
+      "titleFont": "Times New Roman"
     }
   },
   "data": {
@@ -30,15 +32,12 @@
           "Johor",
           "Kedah",
           "Kelantan",
-          "Kuala Lumpur",
-          "Labuan",
           "Melaka",
           "Negeri Sembilan",
           "Pahang",
-          "Penang",
           "Perak",
           "Perlis",
-          "Putrajaya",
+          "Pulau Pinang",
           "Sabah",
           "Sarawak",
           "Selangor",
@@ -48,15 +47,12 @@
           "Johor",
           "Kedah",
           "Kelantan",
-          "Kuala Lumpur",
-          "Labuan",
           "Melaka",
           "Negeri Sembilan",
           "Pahang",
-          "Penang",
           "Perak",
           "Perlis",
-          "Putrajaya",
+          "Pulau Pinang",
           "Sabah",
           "Sarawak",
           "Selangor",
@@ -71,23 +67,99 @@
       "filter": "datum.state == State_selection"
     }
   ],
-  "mark": { "type": "line", "point": true },
-  "encoding": {
-    "x": {
-      "field": "year",
-      "type": "ordinal",
-      "title": "Year",
-      "axis": { "labelAngle": 0 }
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": {
+          "shape": "circle",
+          "color": "#970f008f",
+          "size": 100
+        },
+        "color": "#E74C3C",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0 }
+        },
+        "y": {
+          "field": "marriage_rate_per_1000_population",
+          "type": "quantitative",
+          "title": "Marriage Rate and Birth Rate by 1000 population",
+          "scale": { "domain": [0, 25] }
+        },
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          {
+            "field": "marriage_rate_per_1000_population",
+            "title": "Marriage Rate"
+          }
+        ]
+      }
     },
-    "y": {
-      "field": "total_live_births",
-      "type": "quantitative",
-      "title": "Count"
+    {
+      "mark": {
+        "type": "line",
+        "point": { "shape": "square", "color": "#006bb2ae", "size": 100 },
+        "color": "#3498DB",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": {
+          "field": "birth_rate_per_1000_population",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          { "field": "birth_rate_per_1000_population", "title": "Birth Rate" }
+        ]
+      }
     },
-    "tooltip": [
-      { "field": "year", "title": "Year" },
-      { "field": "total_marriages", "title": "Total Number of Marriages" },
-      { "field": "total_live_births", "title": "Total Number of Births" }
-    ]
-  }
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "dy": -10,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#E74C3C"
+      },
+      "transform": [{ "filter": "datum.year == 2022" }],
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": {
+          "field": "marriage_rate_per_1000_population",
+          "type": "quantitative"
+        },
+        "text": { "value": "Marriage Rate" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "dy": 10,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#3498DB"
+      },
+      "transform": [{ "filter": "datum.year == 2022" }],
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": {
+          "field": "birth_rate_per_1000_population",
+          "type": "quantitative"
+        },
+        "text": { "value": "Birth Rate" }
+      }
+    }
+  ]
 }
